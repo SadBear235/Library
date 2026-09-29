@@ -14,6 +14,10 @@ public class Vec2 {
         this.y = y;
     }
 
+    public Vec2 copy() {
+        return new Vec2(x, y);
+    }
+
     public Vec2 set(float x, float y) {
         this.x = x;
         this.y = y;

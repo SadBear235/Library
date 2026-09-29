@@ -4,7 +4,7 @@ import org.sadbear.util.Vec2;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
-public abstract class UIElement implements PConstants {
+public abstract class UIElement implements Constants {
     Vec2 position;
     Vec2 size;
 

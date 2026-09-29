@@ -32,6 +32,10 @@ public class Vec3 {
         return this;
     }
 
+    public Vec3 copy() {
+        return new Vec3(x, y, z);
+    }
+
     public float mag() {
         return (float)Math.sqrt(x*x + y*y + z*z);
     }
