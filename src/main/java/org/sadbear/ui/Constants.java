@@ -1,4 +1,7 @@
 package org.sadbear.ui;
 
-public interface Constants {
+import processing.core.PConstants;
+
+public interface Constants extends PConstants {
+
 }
