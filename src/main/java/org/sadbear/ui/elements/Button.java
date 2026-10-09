@@ -1,17 +1,22 @@
-package org.sadbear.ui;
+package org.sadbear.ui.elements;
 
-import org.sadbear.util.Vec2;
+import org.sadbear.ui.Mouse;
+import org.sadbear.util.Collision;
+import org.sadbear.util.Vec2f;
 
 public class Button extends Drawable {
     // Start/origin position
-    Vec2 startPosition;
-    Vec2 startSize;
+    Vec2f startPosition;
+    Vec2f startSize;
 
-    Vec2 textPosition;
+    Vec2f textPosition;
     float textSize = 12;
-    int textColour = 0;
+    int textColour = TEXT_COLOUR;
 
-    float padding = 12;
+    public int hoverColour = HOVER_BACKGROUND_COLOUR;
+    public int clickColour = CLICK_BACKGROUND_COLOUR;
+
+    public float padding = 6;
 
     int alignX = LEFT;
     int alignY = TOP;
@@ -19,11 +24,15 @@ public class Button extends Drawable {
     int textAlignX = LEFT;
     int textAlignY = CENTER;
 
+    boolean hover;
+    boolean press;
+    boolean click;
+
     String label;
 
-    public Button(String label, Vec2 position, Vec2 size, int textSize) {
-        super(new Vec2(), new Vec2());
-        textPosition = new Vec2();
+    public Button(String label, Vec2f position, Vec2f size, int textSize) {
+        super(position, size);
+        textPosition = new Vec2f();
 
         startPosition = position;
         startSize = size;
@@ -59,40 +68,59 @@ public class Button extends Drawable {
                 break;
             case BOTTOM:
                 position.addLocal(0, size.y);
+                break;
         }
         size = startSize;
 
-        textPosition.set(new Vec2());
+        textPosition.set(new Vec2f());
         switch (textAlignX) {
             case LEFT:
-                textPosition.add(padding, 0);
+                textPosition.addLocal(padding, 0);
                 break;
             case CENTER:
-                textPosition.add(size.x/2, 0);
+                textPosition.addLocal(size.x/2, 0);
                 break;
             case RIGHT:
-                textPosition.add(size.x - padding, 0);
+                textPosition.addLocal(size.x - padding, 0);
                 break;
         }
         switch (textAlignY) {
             case TOP:
-                textPosition.add(0, padding);
+                textPosition.addLocal(0, padding);
                 break;
             case CENTER:
-                textPosition.add(0, size.y/2);
+                textPosition.addLocal(0, size.y/2);
                 break;
             case BOTTOM:
-                textPosition.add(0, size.y - padding);
+                textPosition.addLocal(0, size.y - padding);
                 break;
         }
 
+        hover = Collision.rectCollision(position, size, Mouse.mousePos) && isVisible();
 
+        click = hover && Mouse.leftClick;
+
+        if (hover && Mouse.leftPressed) {
+            press = true;
+        }
+        if (!Mouse.leftPressed) {
+            press = false;
+        }
     }
 
     @Override
     protected void drawLocal() {
+        if (press) background(clickColour);
+        else if (hover) background(hoverColour);
+        else background(fillColour);
+
         fill(textColour);
+        textSize(textSize);
         textAlign(textAlignX, textAlignY);
-        text(label, new Vec2());
+        text(label, textPosition);
+    }
+
+    public boolean click() {
+        return click;
     }
 }

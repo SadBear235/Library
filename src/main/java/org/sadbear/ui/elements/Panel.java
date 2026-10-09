@@ -1,6 +1,6 @@
-package org.sadbear.ui;
+package org.sadbear.ui.elements;
 
-import org.sadbear.util.Vec2;
+import org.sadbear.util.Vec2f;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class Panel extends Drawable {
 
     private PApplet main;
 
-    public Panel(Vec2 position, Vec2 size) {
+    public Panel(Vec2f position, Vec2f size) {
         super(position, size);
     }
 

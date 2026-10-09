@@ -1,19 +1,20 @@
-package org.sadbear.ui;
+package org.sadbear.ui.elements;
 
-import org.sadbear.util.Vec2;
+import org.sadbear.ui.Constants;
+import org.sadbear.ui.UIManager;
+import org.sadbear.util.Vec2f;
 import processing.core.PApplet;
-import processing.core.PConstants;
 
 public abstract class UIElement implements Constants {
-    Vec2 position;
-    Vec2 size;
+    protected Vec2f position;
+    protected Vec2f size;
 
     Panel parent;
 
     private boolean visible = true;
     private boolean parentVisible = true;
 
-    public UIElement(Vec2 position, Vec2 size) {
+    public UIElement(Vec2f position, Vec2f size) {
         this.position = position;
         this.size = size;
     }
@@ -33,10 +34,10 @@ public abstract class UIElement implements Constants {
     protected abstract void drawLocal();
 
     // Getters and Setters
-    public void setPosition(Vec2 position) { this.position = position; }
-    public Vec2 getPosition() { return position; }
-    public void setSize(Vec2 size) { this.size = size; }
-    public Vec2 getSize() { return size; }
+    public void setPosition(Vec2f position) { this.position = position; }
+    public Vec2f getPosition() { return position; }
+    public void setSize(Vec2f size) { this.size = size; }
+    public Vec2f getSize() { return size; }
     public void show() { this.visible = true; }
     public void hide() { this.visible = false; }
     public void setVisibility(boolean visible) { this.visible = visible; }

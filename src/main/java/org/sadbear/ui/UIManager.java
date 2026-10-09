@@ -1,6 +1,8 @@
 package org.sadbear.ui;
 
-import org.sadbear.util.Vec2;
+import org.sadbear.ui.elements.Panel;
+import org.sadbear.ui.elements.UIElement;
+import org.sadbear.util.Vec2f;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ public class UIManager extends PApplet {
     ArrayList<Application> registeredClasses = new ArrayList<>(100);
 
     static Queue<UIElement> drawQueue = new LinkedList<>();
+
+    UIManager selected;
 
     int initWidth;
     int initHeight;
@@ -33,7 +37,9 @@ public class UIManager extends PApplet {
     public void settings() {
         size(initWidth, initHeight);
 
-        parentPanel = new ParentPanel(new Vec2(), new Vec2(initWidth, initHeight), this);
+        Mouse.setParent(this);
+
+        parentPanel = new ParentPanel(new Vec2f(), new Vec2f(initWidth, initHeight), this);
 
         parentPanel.init();
         parentPanel.setInternalMain(this);
@@ -46,6 +52,8 @@ public class UIManager extends PApplet {
 
     @Override
     public void draw() {
+        Mouse.update();
+
         // Update registered classes
         for (Application registered : registeredClasses) {
             registered.update();
@@ -107,7 +115,7 @@ public class UIManager extends PApplet {
 
     private static class ParentPanel extends Panel {
 
-        public ParentPanel(Vec2 position, Vec2 size, PApplet main) {
+        public ParentPanel(Vec2f position, Vec2f size, PApplet main) {
             super(position, size);
 
             setParent(this);
