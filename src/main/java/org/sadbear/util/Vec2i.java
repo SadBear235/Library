@@ -32,6 +32,17 @@ public class Vec2i {
         return new Vec2i(x, y);
     }
 
+    public Vec2i invert() {
+        return new Vec2i(-x, -y);
+    }
+
+    public Vec2i invertLocal() {
+        this.x = -x;
+        this.y = -y;
+
+        return this;
+    }
+
     public Vec2i set(int x, int y) {
         this.x = x;
         this.y = y;

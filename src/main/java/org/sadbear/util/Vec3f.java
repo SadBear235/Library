@@ -36,6 +36,18 @@ public class Vec3f {
         return new Vec3f(x, y, z);
     }
 
+    public Vec3f invert() {
+        return new Vec3f(-x, -y, -z);
+    }
+
+    public Vec3f invertLocal() {
+        this.x = -x;
+        this.y = -y;
+        this.z = -z;
+
+        return this;
+    }
+
     public float mag() {
         return (float)Math.sqrt(x*x + y*y + z*z);
     }

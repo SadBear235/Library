@@ -37,6 +37,18 @@ public class Vec3i {
         return new Vec3i(x, y, z);
     }
 
+    public Vec3i invert() {
+        return new Vec3i(-x, -y, -z);
+    }
+
+    public Vec3i invertLocal() {
+        this.x = -x;
+        this.y = -y;
+        this.z = -z;
+
+        return this;
+    }
+
     public Vec3i set(int x, int y, int z) {
         this.x = x;
         this.y = y;
