@@ -1,6 +1,6 @@
 package org.sadbear.ui;
 
-import org.sadbear.util.Vec2f;
+import org.sadbear.util.vector.Vec2f;
 
 import static processing.core.PConstants.*;
 

@@ -1,6 +1,6 @@
 package org.sadbear.ui.elements;
 
-import org.sadbear.util.Vec2f;
+import org.sadbear.util.vector.Vec2f;
 import processing.core.PImage;
 
 public class Image extends Panel {

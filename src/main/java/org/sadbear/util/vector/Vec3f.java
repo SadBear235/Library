@@ -1,4 +1,4 @@
-package org.sadbear.util;
+package org.sadbear.util.vector;
 
 public class Vec3f {
     public float x;

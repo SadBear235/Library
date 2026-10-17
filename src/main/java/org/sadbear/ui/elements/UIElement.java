@@ -2,7 +2,7 @@ package org.sadbear.ui.elements;
 
 import org.sadbear.ui.Constants;
 import org.sadbear.ui.UIManager;
-import org.sadbear.util.Vec2f;
+import org.sadbear.util.vector.Vec2f;
 import processing.core.PApplet;
 
 public abstract class UIElement implements Constants {

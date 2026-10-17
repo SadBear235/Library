@@ -2,7 +2,7 @@ package org.sadbear.ui;
 
 import org.sadbear.ui.elements.Panel;
 import org.sadbear.ui.elements.UIElement;
-import org.sadbear.util.Vec2f;
+import org.sadbear.util.vector.Vec2f;
 import processing.core.PApplet;
 
 import java.util.ArrayList;

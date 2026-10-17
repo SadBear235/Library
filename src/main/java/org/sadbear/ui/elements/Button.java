@@ -2,7 +2,7 @@ package org.sadbear.ui.elements;
 
 import org.sadbear.ui.Mouse;
 import org.sadbear.util.Collision;
-import org.sadbear.util.Vec2f;
+import org.sadbear.util.vector.Vec2f;
 
 public class Button extends Drawable {
     // Start/origin position

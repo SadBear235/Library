@@ -1,4 +1,4 @@
-package org.sadbear.util;
+package org.sadbear.util.vector;
 
 public class Vec3 {
     public double x;

@@ -1,5 +1,7 @@
 package org.sadbear.util;
 
+import org.sadbear.util.vector.Vec2f;
+
 public class Collision {
     // rP = rectPos, rS = rectSize, pP = pointPos
     public static boolean rectCollision(Vec2f rP, Vec2f rS, Vec2f pP) {

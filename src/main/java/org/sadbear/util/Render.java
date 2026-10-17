@@ -1,5 +1,6 @@
 package org.sadbear.util;
 
+import org.sadbear.util.vector.Vec2f;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
