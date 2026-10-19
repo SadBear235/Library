@@ -3,8 +3,8 @@ package org.sadbear.util.bezier;
 import org.sadbear.util.vector.Vec2f;
 
 // Implementation of a 3 point bezier curve
-public class CubicBezierOld extends UniformBezierOld {
-    public CubicBezierOld(Vec2f a, Vec2f b, Vec2f c, Vec2f d) {
+public class CubicBezier extends UniformBezier {
+    public CubicBezier(Vec2f a, Vec2f b, Vec2f c, Vec2f d) {
         super(a, b, c, d);
     }
 

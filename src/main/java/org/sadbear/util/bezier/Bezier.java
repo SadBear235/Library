@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 // Implementation of an n-numbered point bezier curve
-public class BezierOld {
+public class Bezier {
     Vec2f[] points;
     int pointNum = 0;
 
@@ -19,12 +19,12 @@ public class BezierOld {
 
     boolean lineDebug = true;
 
-    public BezierOld(Vec2f... points) {
+    public Bezier(Vec2f... points) {
         this.points = points;
     }
 
     public float getLength() {
-        if (calculateLength) updateLength();
+        if (calculateLength) calculateLength();
 
         return length;
     }
@@ -88,7 +88,7 @@ public class BezierOld {
         return lastPoints[0];
     }
 
-    private void updateLength() {
+    public void calculateLength() {
         float t = 0;
         float len = 0;
 

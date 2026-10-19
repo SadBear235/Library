@@ -6,38 +6,38 @@ import org.sadbear.util.vector.Vec2f;
 import java.util.ArrayList;
 
 public class CompositeBezier {
-    private final ArrayList<UniformBezierOld> beziers = new ArrayList<>();
+    private final ArrayList<UniformBezier> beziers = new ArrayList<>();
 
     int size = 0;
 
     boolean lineDebug = true;
 
     public CompositeBezier(Vec2f a, Vec2f b, Vec2f c) {
-        beziers.add(new QuadraticBezierOld(a, b, c));
+        beziers.add(new QuadraticBezier(a, b, c));
         size = 1;
     }
 
     public CompositeBezier(Vec2f a, Vec2f b, Vec2f c, Vec2f d) {
-        beziers.add(new CubicBezierOld(a, b, c, d));
+        beziers.add(new CubicBezier(a, b, c, d));
         size = 1;
     }
 
     public void addQuadraticBezier(Vec2f b, Vec2f c) {
-        beziers.add(new QuadraticBezierOld(getLastControlPoint(), b, c).setOffset(size));
+        beziers.add(new QuadraticBezier(getLastControlPoint(), b, c).setOffset(size));
         size++;
     }
 
     public void addCubicBezier(Vec2f b, Vec2f c, Vec2f d) {
-        beziers.add(new CubicBezierOld(getLastControlPoint(), b, c, d).setOffset(size));
+        beziers.add(new CubicBezier(getLastControlPoint(), b, c, d).setOffset(size));
         size++;
     }
 
     private Vec2f getLastControlPoint() {
-        UniformBezierOld b = beziers.get(size-1);
+        UniformBezier b = beziers.get(size-1);
 
-        if (b.getClass() == QuadraticBezierOld.class) {
+        if (b.getClass() == QuadraticBezier.class) {
             return b.getControlPoint(2);
-        } else if (b.getClass() == CubicBezierOld.class) {
+        } else if (b.getClass() == CubicBezier.class) {
             return b.getControlPoint(3);
         }
 
@@ -61,22 +61,24 @@ public class CompositeBezier {
         return tCurr;
     }
 
-    UniformBezierOld getCurve(float t) {
+    UniformBezier getCurve(float t) {
         return getCurve(getCurveNum(t));
     }
 
-    public UniformBezierOld getCurve(int index) {
+    public UniformBezier getCurve(int index) {
         return beziers.get(index);
     }
 
     public void checkResize() {
-        for (UniformBezierOld b : beziers) {
+        for (UniformBezier b : beziers) {
             b.checkResize();
         }
     }
 
     int getCurveNum(float t) {
-        return (Math.floor(t) < size) ? (int)Math.floor(t) : size-1;
+        int num = (int)Math.floor(t);
+        if (num >= size) return size-1;
+        return Math.max(num, 0);
     }
 
     public float getMaxT() {

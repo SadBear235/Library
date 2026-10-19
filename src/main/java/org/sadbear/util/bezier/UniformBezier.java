@@ -4,7 +4,7 @@ import org.sadbear.util.Render;
 import org.sadbear.util.vector.Vec2f;
 
 // Creates a bezier curve that can
-public abstract class UniformBezierOld extends BezierOld {
+public abstract class UniformBezier extends Bezier {
     // Vectors used to calculate next point
     private final Vec2f[] vec;
 
@@ -12,7 +12,7 @@ public abstract class UniformBezierOld extends BezierOld {
 
     float offset = 0;
 
-    public UniformBezierOld(Vec2f... points) {
+    public UniformBezier(Vec2f... points) {
         super(points);
 
         updatePoints();
@@ -31,7 +31,7 @@ public abstract class UniformBezierOld extends BezierOld {
         return super.point(t - offset);
     }
 
-    public UniformBezierOld setOffset(float offset) {
+    public UniformBezier setOffset(float offset) {
         this.offset = offset;
 
         return this;
@@ -57,6 +57,11 @@ public abstract class UniformBezierOld extends BezierOld {
     }
 
     private float calculateLength(float t) {
+        // 1, 2 and 3 amount of vector calculations
+        if (vec.length == 1) return vec[0].mag();
+        if (vec.length == 2) return vec[0].mult(t).add(vec[1]).mag();
+        if (vec.length == 3) return vec[0].mult(t*t).add(vec[1].mult(t)).add(vec[2]).mag();
+        // Any amount of vectors
         Vec2f v = new Vec2f();
         for (int i = 0; i < vec.length; i++) {
             v.addLocal(vec[i].mult((float) Math.pow(t, vec.length-i-1)));
