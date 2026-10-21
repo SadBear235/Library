@@ -164,6 +164,6 @@ public class Vec3i {
         final Vec3i v = (Vec3i) obj;
 
         // Check that x and y values match
-        return x == v.x && y == v.y;
+        return x == v.x && y == v.y && z == v.z;
     }
 }

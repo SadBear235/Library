@@ -17,7 +17,7 @@ public class Mouse {
     protected Vec2f mousePos = new Vec2f();
     protected Vec2f mouseDrag = new Vec2f();
 
-    protected int mouseWheel = 0;
+    protected int mouseWheel, mouseWheelPublic;
 
     protected boolean mousePressed, leftPressed, centrePressed, rightPressed,
                     mouseClicked, leftClicked, centreClicked, rightClicked;
@@ -26,15 +26,16 @@ public class Mouse {
         this.parent = parent;
 
         // Register methods
-        parent.registerMethod("post", this);
+        parent.registerMethod("draw", this);
         parent.registerMethod("mouseEvent", this);
     }
 
-    public void post() {
+    public void draw() {
         setMouseClicked(false, LEFT);
         setMouseClicked(false, CENTER);
         setMouseClicked(false, RIGHT);
 
+        mouseWheelPublic = mouseWheel;
         mouseWheel = 0;
     }
 
@@ -65,7 +66,7 @@ public class Mouse {
     }
 
     public int getMouseWheel() {
-        return mouseWheel;
+        return mouseWheelPublic;
     }
 
     public Vec2f getMousePos() {
