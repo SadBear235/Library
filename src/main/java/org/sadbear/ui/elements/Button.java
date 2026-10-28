@@ -96,7 +96,7 @@ public class Button extends Drawable {
                 break;
         }
 
-        hover = Collision.rectCollision(position, size, Mouse.mousePos) && isVisible();
+        hover = Collision.rectPoint(position, size, Mouse.mousePos) && isVisible();
 
         click = hover && Mouse.leftClick;
 

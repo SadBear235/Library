@@ -1,6 +1,5 @@
 package org.sadbear.util.bezier;
 
-import org.sadbear.util.Render;
 import org.sadbear.util.vector.Vec2f;
 
 // Creates a bezier curve that can
@@ -126,11 +125,13 @@ public abstract class UniformBezier extends Bezier {
             point = point(t);
 
             if (lastPoint != null && point != null) {
-                if (lineDebug) Render.line(lastPoint, point);
-                else Render.point(point);
+                //if (lineDebug) Render.line(lastPoint, point);
+                //else Render.point(point);
             }
 
             t = calculateNextPoint(t, distance);
         }
+
+        System.err.println("Rendering requires an instantiated object now, temporary solution lol");
     }
 }

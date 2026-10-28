@@ -20,7 +20,10 @@ public class Mouse {
     protected int mouseWheel, mouseWheelPublic;
 
     protected boolean mousePressed, leftPressed, centrePressed, rightPressed,
-                    mouseClicked, leftClicked, centreClicked, rightClicked;
+                    mouseClicked, leftClicked, centreClicked, rightClicked, // Only true when the mouse stops being pressed
+                    lastMouseClicked, lastLeftClicked, lastCentreClicked, lastRightClicked,
+                    mouseStartClicked, leftStartClicked, centreStartClicked, rightStartClicked, // Only true when the mouse start to be pressed
+                    lastMouseStartClicked, lastLeftStartClicked, lastCentreStartClicked, lastRightStartClicked;
 
     public Mouse(PApplet parent) {
         this.parent = parent;
@@ -28,15 +31,6 @@ public class Mouse {
         // Register methods
         parent.registerMethod("draw", this);
         parent.registerMethod("mouseEvent", this);
-    }
-
-    public void draw() {
-        setMouseClicked(false, LEFT);
-        setMouseClicked(false, CENTER);
-        setMouseClicked(false, RIGHT);
-
-        mouseWheelPublic = mouseWheel;
-        mouseWheel = 0;
     }
 
     public boolean pressed(int button) {
@@ -54,15 +48,28 @@ public class Mouse {
 
     public boolean clicked(int button) {
         return switch (button) {
-            case LEFT -> leftClicked;
-            case CENTER -> centreClicked;
-            case RIGHT -> rightClicked;
-            default -> mousePressed;
+            case LEFT -> lastLeftClicked;
+            case CENTER -> lastCentreClicked;
+            case RIGHT -> lastRightClicked;
+            default -> lastMouseClicked;
         };
     }
 
     public boolean clicked() {
         return mouseClicked;
+    }
+
+    public boolean startClicked(int button) {
+        return switch (button) {
+            case LEFT -> lastLeftStartClicked;
+            case CENTER -> lastCentreStartClicked;
+            case RIGHT -> lastRightStartClicked;
+            default -> lastMouseStartClicked;
+        };
+    }
+
+    public boolean startClicked() {
+        return lastMouseStartClicked;
     }
 
     public int getMouseWheel() {
@@ -77,11 +84,33 @@ public class Mouse {
         return mouseDrag.copy();
     }
 
+    public void draw() {
+        lastLeftClicked = leftClicked;
+        lastCentreClicked = centreClicked;
+        lastRightClicked = rightClicked;
+        lastMouseClicked = mouseClicked;
+        setMouseClicked(false, LEFT);
+        setMouseClicked(false, CENTER);
+        setMouseClicked(false, RIGHT);
+
+        lastLeftStartClicked = leftStartClicked;
+        lastCentreStartClicked = centreStartClicked;
+        lastRightStartClicked = rightStartClicked;
+        lastMouseStartClicked = mouseStartClicked;
+        setStartMouseClicked(false, LEFT);
+        setStartMouseClicked(false, CENTER);
+        setStartMouseClicked(false, RIGHT);
+
+        mouseWheelPublic = mouseWheel;
+        mouseWheel = 0;
+    }
+
     public void mouseEvent(MouseEvent e) {
         int button = e.getButton();
         switch (e.getAction()) {
             case PRESS:
                 setMousePressed(true, button);
+                setStartMouseClicked(true, button);
                 break;
             case RELEASE:
                 setMousePressed(false, button);
@@ -128,6 +157,22 @@ public class Mouse {
                 break;
             case RIGHT:
                 rightClicked = value;
+                break;
+        }
+    }
+
+    // Helper function for mouseEvent function
+    private void setStartMouseClicked(boolean value, int button) {
+        mouseStartClicked = value;
+        switch (button) {
+            case LEFT:
+                leftStartClicked = value;
+                break;
+            case CENTER:
+                centreStartClicked = value;
+                break;
+            case RIGHT:
+                rightStartClicked = value;
                 break;
         }
     }

@@ -151,4 +151,8 @@ public class Vec2i {
         // Check that x and y values match
         return x == v.x && y == v.y;
     }
+
+    public Vec2f toVec2f() {
+        return new Vec2f(x, y);
+    }
 }

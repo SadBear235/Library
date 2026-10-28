@@ -38,7 +38,7 @@ public class Keyboard {
         return keysTypedPublic.getOrDefault(keyCode, 0);
     }
 
-    public String getkeyList() {
+    public String getKeyList() {
         return typedString;
     }
 

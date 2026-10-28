@@ -1,6 +1,5 @@
 package org.sadbear.util.bezier;
 
-import org.sadbear.util.Render;
 import org.sadbear.util.vector.Vec2f;
 
 import java.util.Arrays;
@@ -120,10 +119,12 @@ public class Bezier {
             point = point(t);
 
             if (lastPoint != null && point != null) {
-                if (lineDebug) Render.line(lastPoint, point);
-                else Render.point(point);
+                //if (lineDebug) Render.line(lastPoint, point);
+                //else Render.point(point);
             }
         }
+
+        System.err.println("Rendering requires an instantiated object now, temporary solution lol");
     }
 
     public void setLineDebugMode(boolean mode) {
