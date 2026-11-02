@@ -3,6 +3,7 @@ package org.sadbear.render.ui;
 import org.sadbear.input.Keyboard;
 import org.sadbear.input.Mouse;
 import org.sadbear.render.Render;
+import org.sadbear.util.vector.Vec2f;
 
 public abstract class UIElement {
     Render render;
@@ -20,6 +21,7 @@ public abstract class UIElement {
     public abstract void reset();
     public abstract void update();
     public abstract void draw();
+    public abstract void setOffset(Vec2f offset);
 
     public void setVisible(boolean visible) {
         this.visible = visible;

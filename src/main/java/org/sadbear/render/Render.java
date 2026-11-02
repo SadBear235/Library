@@ -20,6 +20,32 @@ public class Render {
         return parent.height;
     }
 
+    // Transformation functions
+    public void translate(float x, float y) {
+        parent.translate(x, y);
+    }
+    public void translate(Vec2f pos) {
+        parent.translate(pos.x, pos.y);
+    }
+    public void rotate(float angle) {
+        parent.rotate(angle);
+    }
+    public void scale(float s) {
+        parent.scale(s);
+    }
+    public void scale(float x, float y) {
+        parent.scale(x, y);
+    }
+    public void scale(Vec2f scale) {
+        parent.scale(scale.x, scale.y);
+    }
+    public void pushMatrix() {
+        parent.pushMatrix();
+    }
+    public void popMatrix() {
+        parent.popMatrix();
+    }
+
     // createGraphics();
     public PGraphics createGraphics(Vec2f size) {
         return parent.createGraphics((int)size.x, (int)size.y);

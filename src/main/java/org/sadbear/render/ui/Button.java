@@ -93,6 +93,11 @@ public class Button extends UIElement {
         render.text(label, position.add(size.mult(0.5f)));
     }
 
+    @Override
+    public void setOffset(Vec2f offset) {
+        this.position.addLocal(offset);
+    }
+
     public boolean isClicked() {
         return clicked;
     }
