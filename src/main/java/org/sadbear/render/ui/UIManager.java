@@ -38,6 +38,12 @@ public class UIManager {
         elements.add(element);
     }
 
+    public void addUI(UIElement[] elements) {
+        for (UIElement element : elements) {
+            addUI(element);
+        }
+    }
+
     public ArrayList<UIElement> getElements() {
         return elements;
     }

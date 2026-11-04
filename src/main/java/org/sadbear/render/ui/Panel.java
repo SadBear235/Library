@@ -49,8 +49,24 @@ public class Panel extends UIElement {
         render.rect(position, size);
     }
 
+    public Vec2f getSize() {
+        return size;
+    }
+
     @Override
     public void setOffset(Vec2f offset) {
         this.position.addLocal(offset);
+    }
+    public void setSize(Vec2f newSize) {
+        this.size.set(newSize);
+    }
+    public void setSize(float width, float height) {
+        this.size.set(width, height);
+    }
+    public void changeSize(Vec2f changeSize) {
+        this.size.addLocal(changeSize);
+    }
+    public void changeSize(float xChange, float yChange) {
+        this.size.addLocal(xChange, yChange);
     }
 }
